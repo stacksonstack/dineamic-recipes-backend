@@ -16,7 +16,7 @@ Meal.destroy_all
 meals_array = []
 mealsId_array = []
 
-2.times do 
+150.times do 
     meals = RestClient.get('https://www.themealdb.com/api/json/v1/1/random.php')
     data = JSON.parse(meals)
     if(mealsId_array.include?(data["meals"][0]["idMeal"]) == false)
@@ -25,13 +25,35 @@ mealsId_array = []
     mealsId_array.push(data["meals"][0]["idMeal"])
 end
 
-meals_array.each do |meal| 
-    byebug
+def ingredient_to_array(meal)
+    ingredients_array = []
+    counter = 1
+    while counter <= 20
+        ingredients_array.push(meal["meals"][0]["strIngredient#{counter}"])
+        counter += 1
+    end
+    ingredients_array.reject(&:blank?)
+end
+
+def measurement_to_array(meal)
+    measurements_array = []
+    counter = 1
+    while counter <= 20
+        measurements_array.push(meal["meals"][0]["strMeasure#{counter}"])
+        counter += 1
+    end
+    measurements_array.reject(&:blank?)
+end
+
+meals_array.each do |meal|
     Meal.create(
         name: meal["meals"][0]["strMeal"],
         image: meal["meals"][0]["strMealThumb"],
         category: meal["meals"][0]["strCategory"],
         origin: meal["meals"][0]["strArea"],
-        youtube_link: meal["meals"][0]["strYoutube"]
+        youtube_link: meal["meals"][0]["strYoutube"],
+        instructions: meal["meals"][0]["strInstructions"],
+        ingredient: ingredient_to_array(meal),
+        measurement: measurement_to_array(meal)
     )
 end

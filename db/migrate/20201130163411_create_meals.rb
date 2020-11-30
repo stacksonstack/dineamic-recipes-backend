@@ -6,8 +6,6 @@ class CreateMeals < ActiveRecord::Migration[6.0]
       t.string :category
       t.string :origin
       t.string :youtube_link
-      t.text :measurements
-      t.text :ingredients
       t.text :instructions
       t.timestamps
     end
