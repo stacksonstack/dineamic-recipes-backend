@@ -57,3 +57,9 @@ meals_array.each do |meal|
         measurement: measurement_to_array(meal)
     )
 end
+
+User.create(
+    name: "user",
+    email: "user@gmail.com",
+    password: "1234"
+)
