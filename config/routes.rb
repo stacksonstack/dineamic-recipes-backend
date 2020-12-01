@@ -5,7 +5,6 @@ Rails.application.routes.draw do
       resources :users
       resources :meals
       resources :user_meals
-      get 'users/:id/user_meals' => "user_meals#filter_by_user"
     end
   end
 

@@ -1,15 +1,10 @@
 class Api::V1::UserMealsController < ApplicationController
 
-    before_action :find_user_meal, except: [:index]
+    before_action :find_user_meal, except: [:index, :create]
 
     def index
         @user_meals = UserMeal.all
         render json: @user_meals
-    end
-
-    def filter_by_user
-        user_meals = UserMeal.where("user_id = #{params[:id]}").map { |meal| meal.meal }
-        render json: user_meals
     end
 
     def show
@@ -21,7 +16,6 @@ class Api::V1::UserMealsController < ApplicationController
         render json: @user_meal
     end
     
-
     def create
         user_meal = UserMeal.create(user_meals_params)
         render json: user_meal
@@ -34,12 +28,11 @@ class Api::V1::UserMealsController < ApplicationController
         # end
     end
     
-    
     private
 
     def find_user_meal
         @user_meal = UserMeal.find(params[:id])
-      end
+    end
 
     def user_meals_params
         params.require(:user_meal).permit(:meal_id, :user_id, :favorite)
