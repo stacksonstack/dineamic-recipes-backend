@@ -8,7 +8,7 @@ class Api::V1::UserMealsController < ApplicationController
     end
 
     def filter_by_user
-        user_meals = UserMeal.where("user_id = #{params[:id]}")
+        user_meals = UserMeal.where("user_id = #{params[:id]}").map { |meal| meal.meal }
         render json: user_meals
     end
 
