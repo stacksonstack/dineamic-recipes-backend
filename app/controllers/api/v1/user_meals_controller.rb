@@ -1,19 +1,30 @@
 class Api::V1::UserMealsController < ApplicationController
 
+    before_action :find_user_meal, except: [:index]
+
     def index
         @user_meals = UserMeal.all
         render json: @user_meals
     end
 
+    def filter_by_user
+        user_meals = UserMeal.where("user_id = #{params[:id]}")
+        render json: user_meals
+    end
+
     def show
-        @user_meals = UserMeal.find(params[:id])
-        render json: @user_meals
+        render json: @user_meal
+    end
+
+    def update
+        @user_meal.update(user_meals_params)
+        render json: @user_meal
     end
     
 
     def create
-        @user_meals = UserMeal.create(user_meals_params)
-        render json: @user_meals
+        user_meal = UserMeal.create(user_meals_params)
+        render json: user_meal
         # if @user_meals.valid?
         #   flash[:success] = "Object successfully created"
           
@@ -23,7 +34,12 @@ class Api::V1::UserMealsController < ApplicationController
         # end
     end
     
-    private 
+    
+    private
+
+    def find_user_meal
+        @user_meal = UserMeal.find(params[:id])
+      end
 
     def user_meals_params
         params.require(:user_meal).permit(:meal_id, :user_id, :favorite)

@@ -3,21 +3,10 @@ Rails.application.routes.draw do
   namespace :api do 
     namespace :v1 do
       resources :users
-    end
-  end
-
-
-  namespace :api do 
-    namespace :v1 do
       resources :meals
+      resources :user_meals
+      get 'users/:id/user_meals' => "user_meals#filter_by_user"
     end
   end
-
-  namespace :api do 
-    namespace :v1 do
-      resources :user_meals
-    end
-  end  
-
 
 end
