@@ -27,6 +27,12 @@ class Api::V1::UserMealsController < ApplicationController
         #   [:error] = "Something went wrong"
         # end
     end
+
+    def destroy
+        @user_meal.destroy
+        @user_meals = UserMeal.all
+        render json: @user_meals
+    end
     
     private
 
