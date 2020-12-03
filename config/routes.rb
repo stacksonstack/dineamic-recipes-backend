@@ -4,7 +4,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users
       resources :meals
-      resources :user_meals
+      resources :user_meals, except: :destroy
+      delete 'users/:user_id/user_meals/:meal_id', :to => 'user_meals#destroy'
     end
   end
 

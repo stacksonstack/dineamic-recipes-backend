@@ -1,6 +1,6 @@
 class Api::V1::UserMealsController < ApplicationController
 
-    before_action :find_user_meal, except: [:index, :create]
+    before_action :find_user_meal, except: [:index, :create, :destroy]
 
     def index
         @user_meals = UserMeal.all
@@ -29,9 +29,11 @@ class Api::V1::UserMealsController < ApplicationController
     end
 
     def destroy
-        @user_meal.destroy
-        @user_meals = UserMeal.all
-        render json: @user_meals
+        user_meal = UserMeal.find_by(user_id: params[:user_id], meal_id: params[:meal_id])
+        user_meal.destroy
+
+        user_meals = User.find(params[:user_id]).meals
+        render json: user_meals
     end
     
     private
