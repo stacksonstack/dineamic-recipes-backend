@@ -3,9 +3,7 @@ Having trouble figuring out what to make for dinner? Are you tired of cooking th
 
 ## Built With
 - Ruby on rails
-- Javascript
-- React 
-- Pure CSS
+- Active Record
 - Active Model Serializer
 - TheMealDB Api ~ https://www.themealdb.com/api.php
 
