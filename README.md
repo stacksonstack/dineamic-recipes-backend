@@ -5,6 +5,7 @@ Having trouble figuring out what to make for dinner? Are you tired of cooking th
 - Ruby on rails
 - Active Record
 - Active Model Serializer
+- PostgreSQL
 - TheMealDB Api ~ https://www.themealdb.com/api.php
 
 ## Getting Started
