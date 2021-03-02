@@ -6,6 +6,7 @@ Having trouble figuring out what to make for dinner? Are you tired of cooking th
 - Active Record
 - Active Model Serializer
 - PostgreSQL
+- Rack
 - TheMealDB Api ~ https://www.themealdb.com/api.php
 
 ## Getting Started
